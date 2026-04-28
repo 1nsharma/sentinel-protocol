@@ -101,6 +101,30 @@ app.post('/api/sign', upload.single('media'), async (req, res) => {
 });
 
 /**
+ * [MONETIZATION ENGINE] Enterprise VaaS Billing (Verification-as-a-Service)
+ * Charges Enterprise clients (News/Insurance) $0.50 per API call via Stripe/Crypto.
+ */
+app.post('/api/billing/charge', async (req, res) => {
+    const { enterpriseApiKey, apiCalls } = req.body;
+    // In production, this connects to Stripe API to deduct funds
+    const ratePerCall = 0.50; // $0.50 USD
+    const totalCharge = apiCalls * ratePerCall;
+
+    console.log(`[VAAS BILLING] Deducting $${totalCharge} from Enterprise Wallet (Key: ${enterpriseApiKey})`);
+
+    res.json({
+        success: true,
+        message: "Enterprise Wallet Charged successfully.",
+        billing: {
+            calls: apiCalls,
+            rate: ratePerCall,
+            totalChargedUSD: totalCharge,
+            platformRevenueShare: totalCharge * 0.025 // 1nsharma takes 2.5% ($0.0125 per call)
+        }
+    });
+});
+
+/**
  * [PILLAR 3: Ledger] Global Authority Verification
  */
 app.get('/api/verify/:hash', async (req, res) => {

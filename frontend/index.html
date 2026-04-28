@@ -136,6 +136,18 @@
             </div>
             <div id="ledgerResult" class="status-box hidden"></div>
         </div>
+
+        <!-- OPERATION 4: MONETIZATION MARKETPLACE -->
+        <div class="panel" style="margin-top: 30px; border-color: var(--gold);">
+            <h3 style="color: var(--gold);">💰 AI Data Licensing Marketplace</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px;">Sell training rights to Google, OpenAI, and Meta. You keep 97.5%, the Protocol takes 2.5%.</p>
+            <div style="display: flex; gap: 20px;">
+                <input type="text" id="marketHash" placeholder="Asset Hash to Sell..." style="flex: 2;">
+                <input type="number" id="marketPrice" placeholder="Price in USD (e.g. 500)" style="flex: 1;">
+                <button class="btn-accent" onclick="listOnMarketplace()" style="width: 250px; background: linear-gradient(135deg, #f59e0b, #d97706);">List License for AI</button>
+            </div>
+            <div id="marketResult" class="status-box hidden"></div>
+        </div>
     </div>
 
     <footer>
@@ -237,6 +249,30 @@
                     `;
                 }
             } catch (e) { resBox.innerHTML = "Audit Failed: Hash not found in global ledger."; }
+        }
+
+        async function listOnMarketplace() {
+            const hash = document.getElementById('marketHash').value;
+            const price = document.getElementById('marketPrice').value;
+            const mBox = document.getElementById('marketResult');
+
+            if (!hash || !price) return alert("Please enter hash and price.");
+
+            mBox.classList.remove('hidden');
+            mBox.innerHTML = "Deploying Smart Contract License...";
+
+            // Simulate the transaction to the SentinelMarketplace Contract
+            setTimeout(() => {
+                mBox.className = 'status-box status-success';
+                mBox.innerHTML = `
+                    <div style="color:var(--gold); font-weight:800; font-size:1.1rem; margin-bottom:10px;">✓ LICENSE LISTED SECURELY</div>
+                    Asset Hash: <code>${hash}</code><br>
+                    Listing Price: <b>$${price} USD</b><br>
+                    <p style="font-size:0.8rem; margin-top:10px; color:#94a3b8">
+                        Your verified data is now listed on the **Sentinel Data Marketplace**. AI engines will now pay you 97.5% of the licensing fee when training on this data. (2.5% protocol fee).
+                    </p>
+                `;
+            }, 1200);
         }
     </script>
 </body>
