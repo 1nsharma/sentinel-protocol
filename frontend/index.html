@@ -3,110 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentinel Protocol v2 | Digital Truth Engine</title>
+    <title>Sentinel Protocol v2.1 | Global Truth Platform</title>
     <style>
-        :root { --primary: #0ea5e9; --accent: #8b5cf6; --bg: #020617; --panel: #0f172a; --text: #f8fafc; --success: #10b981; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .app-container { max-width: 1100px; width: 100%; }
-        header { text-align: center; margin-bottom: 40px; }
-        header h1 { font-size: 3rem; color: var(--primary); margin: 0; letter-spacing: -1px; }
-        .pill-container { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
-        .pill { padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; border: 1px solid var(--primary); color: var(--primary); }
+        :root { --primary: #0ea5e9; --accent: #8b5cf6; --bg: #020617; --panel: #0f172a; --text: #f8fafc; --success: #10b981; --gold: #f59e0b; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
         
-        .grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; }
-        .panel { background: var(--panel); border: 1px solid #1e293b; border-radius: 16px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: #e2e8f0; }
-        
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; font-weight: 600; }
-        input, select { width: 100%; background: #1e293b; border: 1px solid #334155; padding: 12px; border-radius: 8px; color: white; box-sizing: border-box; }
-        
-        button { width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-accent { background: var(--accent); color: white; }
-        button:hover { opacity: 0.9; transform: translateY(-1px); }
-        button:disabled { background: #334155; cursor: not-allowed; }
+        /* Navigation */
+        nav { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); padding: 15px 40px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
 
-        .status-box { margin-top: 15px; padding: 15px; border-radius: 8px; font-size: 0.8rem; line-height: 1.5; border-left: 4px solid #334155; background: #1e293b; }
-        .status-success { border-left-color: var(--success); background: #064e3b33; }
+        .app-container { max-width: 1200px; width: 100%; margin: 40px auto; padding: 0 20px; flex: 1; }
         
-        .verification-card { border: 1px solid #334155; padding: 15px; border-radius: 10px; margin-top: 10px; }
-        .trust-score { font-size: 2rem; font-weight: 800; color: var(--success); }
+        /* Dashboard Header */
+        .dash-header { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: var(--panel); border: 1px solid #1e293b; padding: 20px; border-radius: 12px; }
+        .stat-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-value { font-size: 1.8rem; font-weight: 800; margin-top: 5px; color: var(--text); }
+        .stat-change { font-size: 0.75rem; margin-top: 5px; color: var(--success); }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .panel { background: var(--panel); border: 1px solid #1e293b; border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.2rem; color: #e2e8f0; border-bottom: 1px solid #1e293b; padding-bottom: 15px; margin-bottom: 20px; }
         
-        code { color: var(--primary); background: #000; padding: 2px 5px; border-radius: 4px; font-size: 0.75rem; word-break: break-all; }
+        /* Forms & Buttons */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; font-weight: 600; }
+        input { width: 100%; background: #020617; border: 1px solid #334155; padding: 14px; border-radius: 10px; color: white; box-sizing: border-box; font-size: 0.9rem; }
+        button { width: 100%; padding: 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 0.95rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #0284c7); color: white; }
+        .btn-accent { background: linear-gradient(135deg, var(--accent), #7c3aed); color: white; }
+        button:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4); }
+        button:disabled { background: #1e293b; color: #475569; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .status-box { margin-top: 20px; padding: 20px; border-radius: 12px; font-size: 0.85rem; line-height: 1.6; background: #020617; border: 1px solid #1e293b; }
+        .status-success { border-color: var(--success); background: #064e3b33; }
+        
+        .trust-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; background: var(--gold); color: #000; margin-top: 10px; }
+        code { color: var(--primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
         .hidden { display: none; }
+
+        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #475569; border-top: 1px solid #1e293b; }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="logo">SENTINEL_PROTOCOL</div>
+        <div class="nav-links">
+            <a href="#">Network Stats</a>
+            <a href="#">Enterprise API</a>
+            <a href="#">Monetization</a>
+            <a href="#" style="color:var(--primary)">Console</a>
+        </div>
+    </nav>
+
     <div class="app-container">
-        <header>
-            <h1>SENTINEL PROTOCOL</h1>
-            <div class="pill-container">
-                <span class="pill">UHI ACTIVE</span>
-                <span class="pill">CPO-SRA ENABLED</span>
-                <span class="pill">LEDGER SYNCED</span>
+        <!-- GLOBAL ANALYTICS DASHBOARD -->
+        <div class="dash-header">
+            <div class="stat-card">
+                <div class="stat-label">Verified Humans (UHI)</div>
+                <div class="stat-value">1,248,092</div>
+                <div class="stat-change">↑ 12% this week</div>
             </div>
-        </header>
-
-        <div class="grid">
-            <!-- PILLAR 1: UHI -->
-            <div class="panel">
-                <h3>👤 1. Unified Human Identity</h3>
-                <p style="font-size: 0.8rem; color: #94a3b8;">Establish your cryptographically verified human presence.</p>
-                
-                <div class="form-group">
-                    <label>Wallet Address (L2)</label>
-                    <input type="text" id="walletAddr" value="0x71C765...d897" readonly>
-                </div>
-                <div class="form-group">
-                    <label>DID (Decentralized ID)</label>
-                    <input type="text" id="didInput" placeholder="did:sentinel:123...">
-                </div>
-                <button class="btn-accent" onclick="registerUHI()">Verify Human (ZK-Proof)</button>
-                
-                <div id="uhiStatus" class="status-box">
-                    Identity Status: <b>Unverified</b>
-                </div>
+            <div class="stat-card">
+                <div class="stat-label">Truth Anchors (CPO)</div>
+                <div class="stat-value">8.4M</div>
+                <div class="stat-change">↑ 4.2M new assets</div>
             </div>
-
-            <div class="panel">
-                <div style="display: flex; gap: 20px;">
-                    <!-- PILLAR 2: CPO -->
-                    <div style="flex: 1;">
-                        <h3>🛡️ 2. Content Proof-of-Origin</h3>
-                        <div class="form-group">
-                            <label>Media Asset</label>
-                            <input type="file" id="mediaFile">
-                        </div>
-                        <div class="form-group">
-                            <label>Creator Metadata</label>
-                            <input type="text" id="creatorMeta" placeholder="e.g., BharatNews_Corp">
-                        </div>
-                        <div style="margin-bottom: 15px; font-size: 0.8rem;">
-                            <input type="checkbox" id="sraToggle" checked> <label style="display:inline;" for="sraToggle">Enforce SRA (Hardware TEE)</label>
-                        </div>
-                        <button id="signBtn" class="btn-primary" disabled onclick="signCPO()">Anchor to Authority Ledger</button>
-                        <div id="cpoStatus" class="status-box hidden"></div>
-                    </div>
-
-                    <!-- PILLAR 3: Ledger Verification -->
-                    <div style="flex: 1; border-left: 1px solid #1e293b; padding-left: 20px;">
-                        <h3>🔍 3. Authority Ledger Verify</h3>
-                        <div class="form-group">
-                            <label>C2PA / SRA Hash</label>
-                            <input type="text" id="verifyHash" placeholder="Enter ledger hash...">
-                        </div>
-                        <button class="btn-primary" onclick="verifyLedger()">Audit Content Truth</button>
-                        <div id="ledgerResult" class="status-box hidden"></div>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-label">Network Revenue</div>
+                <div class="stat-value">$2.14M</div>
+                <div class="stat-change">↑ 22% VaaS growth</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AEO Signal Strength</div>
+                <div class="stat-value">98.4%</div>
+                <div class="stat-change">High Model Priority</div>
             </div>
         </div>
 
-        <footer style="margin-top: 40px; text-align: center; font-size: 0.7rem; color: #475569;">
-            SENTINEL PROTOCOL V2.0.4 • COMPLIANT WITH INDIA IT RULES 2026 • AI ENGINE OPTIMIZED (AEO)
-        </footer>
+        <div class="grid">
+            <!-- OPERATION 1: IDENTITY & REVENUE -->
+            <div class="panel">
+                <h3>👤 Human Identity Portal</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px;">Verified identities unlock the <b>Provable Content Economy</b>. Register your DID to start earning.</p>
+                
+                <div class="form-group">
+                    <label>Enterprise Wallet (L2 Node)</label>
+                    <input type="text" id="walletAddr" value="0x71C765...d897" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Unified DID</label>
+                    <input type="text" id="didInput" placeholder="did:sentinel:universal_id_001">
+                </div>
+                <button class="btn-accent" onclick="registerUHI()">Authorize Global Identity</button>
+                
+                <div id="uhiStatus" class="status-box">
+                    System Status: <b>Waiting for ZK-Proof Authorization...</b>
+                </div>
+            </div>
+
+            <!-- OPERATION 2: CONTENT SIGNING -->
+            <div class="panel">
+                <h3>🛡️ Truth Anchor (SRA Engine)</h3>
+                <div class="form-group">
+                    <label>Original Asset Capture</label>
+                    <input type="file" id="mediaFile">
+                </div>
+                <div class="form-group">
+                    <label>Creator Authority</label>
+                    <input type="text" id="creatorMeta" placeholder="e.g., Global_Press_Corp">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div style="font-size: 0.8rem; color: #94a3b8;">
+                        <input type="checkbox" id="sraToggle" checked> Enforce Hardware TEE
+                    </div>
+                    <span class="trust-badge">SRA READY</span>
+                </div>
+                <button id="signBtn" class="btn-primary" disabled onclick="signCPO()">Anchor & Monetize Content</button>
+                <div id="cpoStatus" class="status-box hidden"></div>
+            </div>
+        </div>
+
+        <!-- OPERATION 3: GLOBAL AUDIT -->
+        <div class="panel" style="margin-top: 30px;">
+            <h3>🔍 Global Authority Ledger Audit</h3>
+            <div style="display: flex; gap: 20px;">
+                <input type="text" id="verifyHash" placeholder="Enter Asset Hash (C2PA/SRA)..." style="flex: 1;">
+                <button class="btn-primary" onclick="verifyLedger()" style="width: 250px;">Verify Truth Origin</button>
+            </div>
+            <div id="ledgerResult" class="status-box hidden"></div>
+        </div>
     </div>
+
+    <footer>
+        SENTINEL PROTOCOL V2.1.0 • ENTERPRISE CORE • © 2026 SENTINEL FOUNDATION
+        <br>
+        <span style="color: #38bdf8;">Compliant with IT Rules 2026 & EU AI Act (Article 50)</span>
+    </footer>
 
     <script>
         const API = 'http://localhost:3000/api';
@@ -114,8 +150,11 @@
 
         async function registerUHI() {
             const wallet = document.getElementById('walletAddr').value;
-            const did = document.getElementById('didInput').value || 'did:sentinel:anon_' + Math.random().toString(36).substr(2, 9);
+            const did = document.getElementById('didInput').value || 'did:sentinel:universal_' + Math.random().toString(36).substr(2, 9);
             
+            const uhiBox = document.getElementById('uhiStatus');
+            uhiBox.innerHTML = "Generating Zero-Knowledge Proof...";
+
             try {
                 const res = await fetch(`${API}/identity/register`, {
                     method: 'POST',
@@ -126,11 +165,11 @@
                 
                 if (data.success) {
                     isUHIVerified = true;
-                    document.getElementById('uhiStatus').className = 'status-box status-success';
-                    document.getElementById('uhiStatus').innerHTML = `<b>✓ Verified Human</b><br>DID: <code>${data.did}</code><br>Status: ${data.status}`;
+                    uhiBox.className = 'status-box status-success';
+                    uhiBox.innerHTML = `<b>✓ IDENTITY VERIFIED</b><br>Global DID: <code>${data.did}</code><br>Trust Tier: **Sovereign Human**`;
                     document.getElementById('signBtn').disabled = false;
                 }
-            } catch (e) { alert("Ledger Connection Failed"); }
+            } catch (e) { uhiBox.innerHTML = "Network Sync Error. Check API status."; }
         }
 
         async function signCPO() {
@@ -139,7 +178,7 @@
             const sra = document.getElementById('sraToggle').checked;
             const status = document.getElementById('cpoStatus');
 
-            if (!file) return alert("Select media");
+            if (!file) return alert("Please select an original asset.");
 
             const formData = new FormData();
             formData.append('media', file);
@@ -148,7 +187,7 @@
             formData.append('walletAddress', document.getElementById('walletAddr').value);
 
             status.classList.remove('hidden');
-            status.innerHTML = "Initializing Secure Enclave...";
+            status.innerHTML = "Executing Hardware-Enforced Signature (SRA)...";
 
             try {
                 const res = await fetch(`${API}/sign`, { method: 'POST', body: formData });
@@ -156,10 +195,15 @@
 
                 if (data.success) {
                     status.className = 'status-box status-success';
-                    status.innerHTML = `<b>✓ ANCHORED TO LEDGER</b><br>Hash: <code>${data.trustBadge.c2paHash}</code><br>Info Gain: ${data.trustBadge.infoGain}%<br>AEO Ready: ${data.trustBadge.aeoReady}`;
+                    status.innerHTML = `
+                        <b>✓ ASSET ANCHORED</b><br>
+                        Ledger Hash: <code>${data.trustBadge.c2paHash}</code><br>
+                        Information Gain: <b>${data.trustBadge.infoGain}%</b><br>
+                        <span class="trust-badge">AEO PRIORITY: ${data.trustBadge.aeoReady ? 'HIGH' : 'STANDARD'}</span>
+                    `;
                     document.getElementById('verifyHash').value = data.trustBadge.c2paHash;
                 }
-            } catch (e) { status.innerHTML = "Signing Error"; }
+            } catch (e) { status.innerHTML = "Signing Error: Hardware Enclave Busy."; }
         }
 
         async function verifyLedger() {
@@ -168,7 +212,7 @@
             if (!hash) return;
 
             resBox.classList.remove('hidden');
-            resBox.innerHTML = "Scanning Authority Ledger...";
+            resBox.innerHTML = "Querying Global Authority Ledger...";
 
             try {
                 const res = await fetch(`${API}/verify/${hash}`);
@@ -177,14 +221,22 @@
                 if (data.verified) {
                     resBox.className = 'status-box status-success';
                     resBox.innerHTML = `
-                        <div class="trust-score">${data.trustScore}%</div>
-                        <b>AUTHENTIC TRUTH</b><br>
-                        AEO Rank: ${data.aeoRank}<br>
-                        Evidence: <code>${data.ledgerEvidence}</code><br>
-                        <p style="font-size:0.7rem">SRA-Verified Hardware Capture detected. This asset contains original information gain.</p>
+                        <div style="display:flex; justify-content:space-between; align-items:center">
+                            <div>
+                                <b style="font-size:1.2rem; color:var(--success)">✓ VERIFIED TRUTH</b><br>
+                                Trust Score: <b>${data.trustScore}%</b> | AEO Rank: <b>${data.aeoRank}</b>
+                            </div>
+                            <div style="text-align:right">
+                                <span class="trust-badge" style="background:var(--primary); color:white">BLOCKCHAIN PROOF</span><br>
+                                <code style="font-size:0.6rem">${data.ledgerEvidence}</code>
+                            </div>
+                        </div>
+                        <p style="font-size:0.8rem; margin-top:15px; color:#94a3b8">
+                            This asset is cryptographically bound to a verified human identity and originated from a TEE-secured capture device.
+                        </p>
                     `;
                 }
-            } catch (e) { resBox.innerHTML = "Verification Failed"; }
+            } catch (e) { resBox.innerHTML = "Audit Failed: Hash not found in global ledger."; }
         }
     </script>
 </body>

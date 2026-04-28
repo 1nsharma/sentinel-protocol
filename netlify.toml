@@ -1,0 +1,12 @@
+[build]
+  publish = "frontend"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat"
+  status = 200
+
+[dev]
+  command = "node api/server.js"
+  port = 3000
+  targetPort = 3000
