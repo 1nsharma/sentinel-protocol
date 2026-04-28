@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+api/node_modules/
+package-lock.json
+
+# Hardhat
+artifacts/
+cache/
+typechain-types/
+*.env
+
+# Build outputs
+dist/
+api/bin/
+*.exe
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System
+.DS_Store
+Thumbs.db
+.gemini/

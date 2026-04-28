@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sentinel-api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - L2_RPC_URL=http://ganache:8545
+    depends_on:
+      - authority-ledger
+
+  authority-ledger:
+    image: trufflesuite/ganache:latest
+    ports:
+      - "8545:8545"
+    command: ["--wallet.seed", "sentinel", "--chain.hardfork", "shanghai"]

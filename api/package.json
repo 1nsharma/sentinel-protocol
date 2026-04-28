@@ -1,0 +1,16 @@
+{
+  "name": "veritrust-api",
+  "version": "1.0.0",
+  "description": "VeriTrust OS API for Sentinel Protocol",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "ethers": "^5.7.2",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
