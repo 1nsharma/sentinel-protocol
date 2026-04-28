@@ -1,0 +1,27 @@
+name: 🤖 Autonomous Wealth CEO
+
+on:
+  schedule:
+    # Runs automatically every day at 12:00 UTC (Midnight)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows you to manually trigger the CEO to work
+
+jobs:
+  run-ceo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm install ethers
+
+      - name: 🤖 Wake up Autonomous CEO
+        run: node agent/CEO.js
+        
+      # (Future expansion: Auto-commit daily treasury reports to a JSON file here)

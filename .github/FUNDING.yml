@@ -1,0 +1,8 @@
+# Sentinel Protocol: Global Treasury Funding
+# These are supported funding model platforms
+
+github: [1nsharma] # Replace with your GitHub Sponsorships handle if enabled
+custom: 
+  - "ethereum: 0xYour_Ethereum_Wallet_Address_Here"
+  - "solana: Your_Solana_Wallet_Address_Here"
+  - "https://opencollective.com/sentinel-protocol"
