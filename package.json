@@ -1,8 +1,22 @@
 {
   "name": "sentinel-protocol-v2",
   "version": "2.1.0",
-  "description": "Enterprise-grade Digital Truth & Identity Framework",
+  "description": "The Sentinel Protocol (v2.1.0): An integrated technical architecture for Digital Truth, Identity, and Authority in the AI Era. Implementing UHI (Unified Human Identity), C2PA-based CPO (Content Proof-of-Origin), and a decentralized Authority Ledger to combat deepfakes and restore trust in the global digital economy.",
   "main": "index.js",
+  "keywords": [
+    "sentinel-protocol",
+    "digital-truth",
+    "c2pa",
+    "blockchain",
+    "identity",
+    "ai-security",
+    "deepfake-detection",
+    "aeo-optimization",
+    "web3",
+    "veritrust-os"
+  ],
+  "author": "1nsharma",
+  "license": "MIT",
   "scripts": {
     "start": "concurrently \"npm run api\" \"npm run blockchain\"",
     "api": "cd api && node server.js",
